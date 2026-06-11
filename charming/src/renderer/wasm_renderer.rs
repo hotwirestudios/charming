@@ -68,6 +68,10 @@ impl WasmRenderer {
         let js = serde_wasm_bindgen::to_value(&chart).unwrap();
         echarts.set_option(js);
     }
+
+    pub fn dispose_chart(echarts: &Echarts) {
+        echarts.dispose();
+    }
 }
 
 #[derive(Clone, Debug, Serialize, Copy)]
@@ -140,4 +144,7 @@ extern "C" {
 
     #[wasm_bindgen(method, js_name = "resize")]
     pub fn resize(this: &Echarts, opts: JsValue);
+
+    #[wasm_bindgen(method, js_name = "dispose")]
+    pub fn dispose(this: &Echarts);
 }
